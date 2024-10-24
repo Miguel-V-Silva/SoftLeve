@@ -12,8 +12,8 @@ public class ConexaoFactory {
 		
 		configuracao.addAnnotatedClass(modelo.entidade.usuario.Usuario.class);
 		configuracao.addAnnotatedClass(modelo.entidade.desenvolvedor.Desenvolvedor.class);
-		//configuracao.addAnnotatedClass(modelo.entidade.tarefa.Tarefa.class);
-		//configuracao.addAnnotatedClass(modelo.entidade.tipotarefa.TipoTarefa.class);
+		configuracao.addAnnotatedClass(modelo.entidade.tarefa.Tarefa.class);
+		configuracao.addAnnotatedClass(modelo.entidade.tipotarefa.TipoTarefa.class);
 		
 		configuracao.configure("hibernet.cfg.xml");
 		

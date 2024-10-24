@@ -12,7 +12,7 @@
 		<property name="hibernate.current_session_context_class">org.hibernate.context.internal.ThreadLocalSessionContext</property>
 		<mapping class="modelo.entidade.usuario.Usuario"/>
 		<mapping class="modelo.entidade.desenvolvedor.Desenvolvedor"/>
-		<!-- <mapping class="modelo.entidade.tarefa.Tarefa"/>
-		<mapping class="modelo.entidade.tipotarefa.TipoTarefa"/>  -->
+		<mapping class="modelo.entidade.tarefa.Tarefa"/>
+		<mapping class="modelo.entidade.tipotarefa.TipoTarefa"/> 
 	</session-factory>
 </hibernate-configuration>

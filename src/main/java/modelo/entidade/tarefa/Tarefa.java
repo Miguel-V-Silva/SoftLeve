@@ -4,12 +4,14 @@ import java.io.ObjectInputFilter.Status;
 //Tarefa (idTarefa*, nome, descrição, status, dt_criação, dt_prazo, dt_completação)
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,17 +40,25 @@ public class Tarefa implements Serializable{
 	@Enumerated(EnumType.STRING)
 	private Status status;
 	
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Column(name = "dt_criacao", nullable = false)
 	private LocalDate dataCriacao;
 	
 	@Column(name = "dt_prazo", nullable = false)
 	private LocalDate dataPrazo;
 	
-	@Column(name = "dt_conclusao", nullable = false)
+	@Column(name = "dt_conclusao", nullable = true)
 	private LocalDate dataConclusao;
 	
-	@ManyToMany(mappedBy = "tarefas")
-    private Set<Desenvolvedor> desenvolvedores;
+	@ManyToMany(mappedBy = "tarefas", fetch = FetchType.LAZY)
+    private Set<Desenvolvedor> desenvolvedores = new HashSet<>();
 
 	
 	
