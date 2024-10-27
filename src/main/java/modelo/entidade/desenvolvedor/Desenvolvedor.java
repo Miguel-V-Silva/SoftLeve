@@ -1,5 +1,4 @@
 package modelo.entidade.desenvolvedor;
-// Desenvolvedor (idDesenvolvedor*, nome, função, email!)
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,9 +29,8 @@ public class Desenvolvedor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_desenvolvedor")
-	private long idDesenvolvedor;
+	@Column(name = "cpf", length = 11)
+	private String cpf;
 
 	@Column(name = "nome_desenvolvedor", length = 45, nullable = false)
 	private String nomeDesenvolvedor;
@@ -49,6 +47,13 @@ public class Desenvolvedor implements Serializable {
     )
     private Set<Tarefa> tarefas =  new HashSet<>();
 
+	@Enumerated(EnumType.STRING)
+	private FuncaoDesenvolvedor funcao;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
 	public Set<Tarefa> getTarefas() {
 		return tarefas;
 	}
@@ -57,23 +62,16 @@ public class Desenvolvedor implements Serializable {
 		this.tarefas = tarefas;
 	}
 
-	@Enumerated(EnumType.STRING)
-	private FuncaoDesenvolvedor funcao;
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 
-	public long getIdDesenvolvedor() {
-		return idDesenvolvedor;
+	public String getCpf() {
+		return cpf;
 	}
 
-	public void setIdDesenvolvedor(long idDesenvolvedor) {
-		this.idDesenvolvedor = idDesenvolvedor;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNomeDesenvolvedor() {

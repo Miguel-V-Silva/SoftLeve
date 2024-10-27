@@ -3,15 +3,12 @@ package modelo.entidade.usuario;
 import java.io.Serializable;
 
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "usuario")
@@ -24,7 +21,7 @@ public class Usuario implements Serializable {
 	@Column(name = "id_usuario")
 	private long idUsuario;
 	
-	@Column(name = "email", unique = true)
+	@Column(name = "email", unique = true, nullable = false)
 	private String email;
 	
 	@Column(name = "senha", length = 45, nullable = false)
@@ -36,10 +33,27 @@ public class Usuario implements Serializable {
 	@Column(name = "inativo", columnDefinition = "boolean default false")
 	private boolean inativo;
 	
+	@Column(name = "tentativas", columnDefinition = "integer default 0")
+	private int tentativas;
+	
 	@Column(name = "administrador", columnDefinition = "boolean default false")
 	private boolean administrador;
 	
 	
+	
+	
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	public int getTentativas() {
+		return tentativas;
+	}
+	public void setTentativas(int tentativas) {
+		this.tentativas = tentativas;
+	}
 	public String getEmail() {
 		return email;
 	}
