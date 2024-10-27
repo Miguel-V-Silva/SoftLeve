@@ -111,6 +111,7 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 		for (Usuario usuarios : daoUsuario.recuperarUsuarios()) {
 			if (usuarios.getEmail().equals(email)) {
 
+				
 				Usuario usuario = new Usuario();
 				usuario = usuarios;
 				usuario.setTentativas(usuarios.getTentativas() + 1);
@@ -137,6 +138,7 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 		
 		for (Usuario usuario : daoUsuario.recuperarUsuarios()) {
 			if (usuario.getEmail().equals(emailSessao)) {
+				usuario.setSenha(request.getParameter("novaSenha"));
 				usuario.setBloqueado(false);
 				usuario.setTentativas(0);
 				daoUsuario.atualizarUsuario(usuario);
