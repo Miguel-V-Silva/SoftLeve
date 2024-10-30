@@ -8,6 +8,8 @@
 </head>
 <body>
 <h1>Home Administrador</h1>
-<a href="<%= request.getContextPath() %>/index.jsp">Voltar</a>
+<a href="<%= request.getContextPath()%>/index.jsp">Voltar</a>
+<a href="<%= request.getContextPath()%>/paginas/administrador/lista-usuarios-adm.jsp">Usuarios</a>
+<a href="<%= request.getContextPath()%>/lista-tarefas-adm.jsp">Tarefas</a>
 </body>
 </html>

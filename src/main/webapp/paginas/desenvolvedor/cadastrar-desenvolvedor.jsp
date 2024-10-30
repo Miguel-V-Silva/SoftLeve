@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuário</title>
-    <link rel="stylesheet" href="../../resources/estilos/style.css">
+    <link rel="stylesheet" href="<%= request.getContextPath()%>/resources/estilos/style.css">
 </head>
 <body>
     <div class="container">
@@ -29,6 +29,7 @@
                 <option value="BACK_END">Back-End</option>
                 <option value="FRONT_END">Front-End</option>
                 <option value="BANCO_DE_DADOS">Banco de Dados</option>
+                <option value="FULL_STACK">Full Stack</option>
             </select>
 
             <button type="submit">Cadastrar</button>
