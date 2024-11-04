@@ -91,8 +91,7 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 					break;
 				}
 
-				Usuario usuario = new Usuario();
-				usuario = usuarios;
+				Usuario usuario = usuarios;
 				usuario.setTentativas(0);
 				daoUsuario.atualizarUsuario(usuario);
 				
@@ -105,11 +104,7 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 					dispatcher.forward(request, response);
 					return;
 				}
-			}
-		}
-
-		for (Usuario usuarios : daoUsuario.recuperarUsuarios()) {
-			if (usuarios.getEmail().equals(email)) {
+			}else if (usuarios.getEmail().equals(email)) {
 
 				
 				Usuario usuario = new Usuario();
@@ -126,7 +121,7 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
-		
+
 	}
 	
 	private void desbloquearUsuario(HttpServletRequest request, HttpServletResponse response)
