@@ -1,22 +1,21 @@
 package modelo.principal;
 
 
-import modelo.dao.desenvolvedor.DesenvolvedorDAOImpl;
-import modelo.entidade.desenvolvedor.Desenvolvedor;
+import modelo.dao.usuario.UsuarioDAOImpl;
+import modelo.entidade.usuario.Usuario;
 
 
 public class Main {
 
 	public static void main(String[] args) {
-		DesenvolvedorDAOImpl desenvolvedorDAO = new DesenvolvedorDAOImpl();
+		UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
+		Usuario usuario = new Usuario();
 		
-        Desenvolvedor desenvolvedor = desenvolvedorDAO.recuperarDesenvolvedorPorIdUsaurio(1L);
+		usuario.setEmail("usu@usu.com");
+		usuario.setSenha("senha");
 		
-		if (desenvolvedor==null) {
-			System.out.println("aaa");
-		}else {
-			System.out.println("bbb");
-		}
+		usuarioDAO.inserirUsuario(usuario);
+		
 	}
 
 }

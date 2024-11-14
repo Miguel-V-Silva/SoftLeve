@@ -133,10 +133,16 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 		
 		for (Usuario usuario : daoUsuario.recuperarUsuarios()) {
 			if (usuario.getEmail().equals(emailSessao)) {
-				usuario.setSenha(request.getParameter("novaSenha"));
+				usuario.setSenha(request.getParameter("senha"));
 				usuario.setBloqueado(false);
 				usuario.setTentativas(0);
 				daoUsuario.atualizarUsuario(usuario);
+				
+				if(usuario.isInativo()) {
+					RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+					dispatcher.forward(request, response);
+					return;
+				}
 				
 				if (usuario.isAdministrador()) {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/administrador/home-adm.jsp");
