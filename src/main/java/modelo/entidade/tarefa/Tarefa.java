@@ -38,13 +38,13 @@ public class Tarefa implements Serializable{
 	private String descricao;
 	
 	@Enumerated(EnumType.STRING)
-	private Status status;
+	private modelo.enumeracao.status.Status status;
 	
-	public Status getStatus() {
+	public modelo.enumeracao.status.Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(Status status) {
+	public void setStatus(modelo.enumeracao.status.Status status) {
 		this.status = status;
 	}
 

@@ -71,6 +71,7 @@ public class DesenvolvedorDAOImpl implements DesenvolvedorDAO {
 		}
 		return true;
 	}
+	
 
 	public boolean atualizarDesenvolvedor(Desenvolvedor desenvolvedor) {
 		Session sessao = null;

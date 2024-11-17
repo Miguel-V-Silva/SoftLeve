@@ -36,9 +36,10 @@
 					<option value="FULL_STACK">Full Stack</option>
 				</select>
 			</div>
-			<button type="button" class="button" onclick="confirmar()">Cadastrar</button>
+			<button type="submit" class="button">Cadastrar</button>
 		</form>
 	</div>
-<script src="<%=request.getContextPath()%>/resources/scripts/login.js"></script>
+<script src="<%=request.getContextPath()%>/resources/scripts/login.js">
+</script>
 </body>
 </html>
