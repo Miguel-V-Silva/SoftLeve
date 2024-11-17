@@ -4,5 +4,6 @@ public enum FuncaoDesenvolvedor {
 
 	BACK_END,
     FRONT_END,
-    BANCO_DE_DADOS
+    BANCO_DE_DADOS,
+    FULL_STACK
 }

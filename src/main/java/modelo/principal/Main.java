@@ -1,33 +1,44 @@
 package modelo.principal;
 
+import java.time.LocalDate;
 
-import modelo.dao.usuario.UsuarioDAOImpl;
-import modelo.entidade.usuario.Usuario;
+import modelo.dao.tarefa.TarefaDAOImpl;
+import modelo.dao.tipotarefa.TipoTarefaDAOImpl;
+import modelo.entidade.tarefa.Tarefa;
+import modelo.entidade.tipotarefa.TipoTarefa;
+import modelo.enumeracao.categoria.Categoria;
+import modelo.enumeracao.status.Status;
 
 public class Main {
 
 	public static void main(String[] args) {
-		UsuarioDAOImpl usuarioDAO = new UsuarioDAOImpl();
-		Usuario usuario = new Usuario();
-		String email = "miguelvieiro.silva@gmail.com";
 		
-		for (Usuario usuarios : usuarioDAO.recuperarUsuarios()) {
-			if (usuarios.getEmail().equals(email)) {
-				usuario = usuarios;
-				
-				usuario.setTentativas(0);
+		TarefaDAOImpl tarefaDAO = new TarefaDAOImpl();
+		Tarefa tarefa = new Tarefa();
+		
+		tarefa.setDataCriacao(LocalDate.now());
+		tarefa.setDataPrazo(LocalDate.of(2024, 11, 22));
+		tarefa.setDescricao("Fazer Programa");
+		tarefa.setNomeTarefa("Nome Tarefa");
+		tarefa.setStatus(Status.EM_ANDAMENTO);
+		
+		TipoTarefaDAOImpl tipoTarefaDAO = new TipoTarefaDAOImpl();
+		TipoTarefa tipoTarefa = new TipoTarefa();
+		
+		tipoTarefa.setTarefa(tarefa);
+		tipoTarefa.setPrioridade(1);
+		tipoTarefa.setCategoria(Categoria.PESSOAL);
+		
+		tarefaDAO.inserirTarefa(tarefa);
+		tipoTarefaDAO.inserirTipoTarefa(tipoTarefa);
+		
+
+		
+		for (Tarefa tarefaa : tarefaDAO.recuperarTarefas()) {
+			if(tarefa.getStatus() == Status.valueOf("EM_ANDAMENTO")) {
+				System.out.println("true");
 			}
 		}
-		
-		try {
-			usuarioDAO.atualizarUsuario(usuario);
-		} catch (Exception e) {
-			System.out.println("Erro ao atualizar");
-		}
-		
-		
-		
-		
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import modelo.entidade.factory.ConexaoFactory;
+import modelo.entidade.tarefa.Tarefa;
 import modelo.entidade.tipotarefa.TipoTarefa;
 
 public class TipoTarefaDAOImpl implements TipoTarefaDAO{
@@ -76,6 +77,29 @@ public class TipoTarefaDAOImpl implements TipoTarefaDAO{
 		} finally {
 			fecharSessao(sessao);
 		}
+	}
+	
+	public TipoTarefa recuperarTipoTarefaPorIdUsaurio(Long id) {
+		Session sessao = null;
+		TipoTarefa tipoTarefa = null;
+		
+			try {
+				sessao = abrirSessao(sessao);
+				
+				CriteriaBuilder contrutor = sessao.getCriteriaBuilder();
+				CriteriaQuery<TipoTarefa> criteria = contrutor.createQuery(TipoTarefa.class);
+				Root<TipoTarefa> raizDesenvolvedor = criteria.from(TipoTarefa.class);
+				criteria.select(raizDesenvolvedor).where(contrutor.equal(raizDesenvolvedor.get("idTipoTarefa"), id));
+				
+				tipoTarefa = sessao.createQuery(criteria).getSingleResult();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				fecharSessao(sessao);
+			}
+			
+			return tipoTarefa;
+			
 	}
 
 	public List<TipoTarefa> recuperarTipoTarefas() {

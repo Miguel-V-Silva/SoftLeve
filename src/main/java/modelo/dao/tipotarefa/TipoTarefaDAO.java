@@ -10,6 +10,8 @@ public interface TipoTarefaDAO {
 	void deletarTipoTarefa(TipoTarefa tipoTarefa);
 
 	void atualizarTipoTarefa(TipoTarefa tipoTarefa);
+	
+	TipoTarefa recuperarTipoTarefaPorIdUsaurio(Long id);
 
 	List<TipoTarefa> recuperarTipoTarefas();
 }
