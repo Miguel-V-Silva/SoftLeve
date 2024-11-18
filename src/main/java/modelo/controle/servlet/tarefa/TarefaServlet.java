@@ -17,8 +17,6 @@ import modelo.dao.tarefa.TarefaDAO;
 import modelo.dao.tarefa.TarefaDAOImpl;
 import modelo.dao.tipotarefa.TipoTarefaDAO;
 import modelo.dao.tipotarefa.TipoTarefaDAOImpl;
-import modelo.dao.usuario.UsuarioDAO;
-import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.desenvolvedor.Desenvolvedor;
 import modelo.entidade.tarefa.Tarefa;
 import modelo.entidade.tipotarefa.TipoTarefa;
@@ -140,4 +138,5 @@ public class TarefaServlet extends HttpServlet implements Serializable{
 		RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/desenvolvedor/home-dev.jsp");
 		dispatcher.forward(request, response);
 	}
+
 }
