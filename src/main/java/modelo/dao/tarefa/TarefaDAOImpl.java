@@ -16,6 +16,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 import modelo.entidade.factory.ConexaoFactory;
 import modelo.entidade.tarefa.Tarefa;
+import modelo.entidade.tipotarefa.TipoTarefa;
 
 public class TarefaDAOImpl implements TarefaDAO{
 
@@ -126,24 +127,5 @@ public class TarefaDAOImpl implements TarefaDAO{
 		return tarefas;
 	}
 	
-	public void gerarRelatorioPDF(Tarefa tarefa) {
-        try {
-        	Document document = new Document();
-        	PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
-        	document.open();
-
-            // Adicionar informações ao PDF
-            document.add(new Paragraph("Relatório da Tarefa"));
-            document.add(new Paragraph("ID: " + tarefa.getIdTarefa()));
-            document.add(new Paragraph("Título: " + tarefa.getNomeTarefa()));
-            document.add(new Paragraph("Descrição: " + tarefa.getDescricao()));
-            document.add(new Paragraph("Status: " + tarefa.getStatus()));
-            document.add(new Paragraph("Data Limite: " + tarefa.getDataPrazo()));
-            document.close();
-            
-            System.out.println("Gerou, so n sei onde");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	
 }

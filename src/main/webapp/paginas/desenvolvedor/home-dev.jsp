@@ -68,43 +68,67 @@
         			
         			Tarefa tarefa = tarefaDAO.recuperarTarefaPorIdUsaurio(tipoTarefa.getTarefa().getIdTarefa());
         	%>
-				<div class="card" onclick="openEditarTarefa(<%= tipoTarefa.getIdTipoTarefa() %>)">
-					<% 
+			<div class="card"
+				onclick="openEditarTarefa(<%= tipoTarefa.getIdTipoTarefa() %>)">
+				<% 
         	                    	if(tarefa.getStatus() == Status.valueOf("PENDENTE")){
         	        %>
-					<span style="background-color: red;"><i
-						class="ri-close-circle-line"></i></span>
-					<%
+				<span style="background-color: red;"><i
+					class="ri-close-circle-line"></i></span>
+				<%
         	                    	}
         	        %>
-					<% 
+				<% 
         	                    	if(tarefa.getStatus() == Status.valueOf("CONCLUIDO")){
         	        %>
-					<span style="background-color: green;"><i
-						class="ri-checkbox-circle-line"></i></span>
-					<%
+				<span style="background-color: green;"><i
+					class="ri-checkbox-circle-line"></i></span>
+				<%
         	                    	}
         	        %>
-					<% 
+				<% 
         	                    	if(tarefa.getStatus() == Status.valueOf("EM_ANDAMENTO")){
         	        %>
-					<span style="background-color: rgb(206, 171, 18);"><i
-						class="ri-history-line"></i></span>
-					<%
+				<span style="background-color: rgb(206, 171, 18);"><i
+					class="ri-history-line"></i></span>
+				<%
         	                    	}
         	        %>
-					<h4><%=tarefa.getNomeTarefa() %></h4>
-					<p>
-						<%=tarefa.getDescricao() %>
-					</p>
-					<form action="deletar-tarefa">
-						<button type="submit">
-							<input type="hidden" value="<%=tipoTarefa.getIdTipoTarefa()%>" name="idTipoTarefa"></input>
-        	                <input type="hidden" value="<%=tarefa.getIdTarefa()%>" name="idTarefa"></input>
-							<a href="#">Deletar <i class="ri-arrow-right-line"></i></a>
-						</button>
-					</form>
-				</div>
+				<h4><%=tarefa.getNomeTarefa() %></h4>
+				<p>
+					<%=tarefa.getDescricao() %>
+				</p>
+				<%
+						if(tarefa.getStatus() == Status.valueOf("CONCLUIDO")){
+							
+							%>
+
+				<form action="gerar-relatorio" method="post">
+					<button type="submit">
+						<input type="hidden" value="<%=tipoTarefa.getIdTipoTarefa()%>"
+							name="idTipoTarefa"></input> <input type="hidden"
+							value="<%=tarefa.getIdTarefa()%>" name="idTarefa"></input> <a
+							href="#">Relatorio <i class="ri-arrow-right-line"></i></a>
+					</button>
+				</form>
+
+				<%
+						}else{
+							%>
+				<form action="deletar-tarefa">
+					<button type="submit">
+						<input type="hidden" value="<%=tipoTarefa.getIdTipoTarefa()%>"
+							name="idTipoTarefa"></input> <input type="hidden"
+							value="<%=tarefa.getIdTarefa()%>" name="idTarefa"></input> <a
+							href="#">Deletar <i class="ri-arrow-right-line"></i></a>
+					</button>
+				</form>
+
+				<%
+						}
+					
+					%>
+			</div>
 			<%
         		}
         	%>

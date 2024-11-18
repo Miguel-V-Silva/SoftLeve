@@ -11,6 +11,5 @@ public class Main {
 		
 		Tarefa tarefa = tarefaDAO.recuperarTarefaPorIdUsaurio(1L);
 		
-		tarefaDAO.gerarRelatorioPDF(tarefa);
 	}
 }

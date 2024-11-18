@@ -14,4 +14,5 @@ public interface TipoTarefaDAO {
 	TipoTarefa recuperarTipoTarefaPorIdUsaurio(Long id);
 
 	List<TipoTarefa> recuperarTipoTarefas();
+	
 }

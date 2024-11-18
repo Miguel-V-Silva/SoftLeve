@@ -9,7 +9,6 @@ import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 
 import modelo.entidade.factory.ConexaoFactory;
-import modelo.entidade.tarefa.Tarefa;
 import modelo.entidade.tipotarefa.TipoTarefa;
 
 public class TipoTarefaDAOImpl implements TipoTarefaDAO{
@@ -120,4 +119,6 @@ public class TipoTarefaDAOImpl implements TipoTarefaDAO{
 		}
 		return tipoTarefas;
 	}
+	
+
 }

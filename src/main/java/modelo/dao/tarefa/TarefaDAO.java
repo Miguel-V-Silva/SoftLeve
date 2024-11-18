@@ -17,5 +17,4 @@ public interface TarefaDAO {
 
 	List<Tarefa> recuperarTarefas();
 
-	void gerarRelatorioPDF(Tarefa tarefa);
 }
