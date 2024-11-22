@@ -96,4 +96,23 @@ public class UsuarioDAOImpl implements UsuarioDAO{
 		}
 		return usuarios;
 	}
+	
+	public Usuario recuperarUsuarioPorId(Long id) {
+		Session sessao = null;
+		Usuario usuario = null;
+		try {
+			sessao = abrirSessao(sessao);
+			CriteriaBuilder construtor = sessao.getCriteriaBuilder();
+			CriteriaQuery<Usuario> criteria = construtor.createQuery(Usuario.class);
+			Root<Usuario> raizCliente = criteria.from(Usuario.class);
+			criteria.select(raizCliente).where(construtor.equal(raizCliente.get("idUsuario"), id));
+			usuario = sessao.createQuery(criteria).getSingleResult();
+			sessao.getTransaction().commit();
+		} catch (Exception exception) {
+			erroSessao(sessao, exception);
+		} finally {
+			fecharSessao(sessao);
+		}
+		return usuario;
+	}
 }

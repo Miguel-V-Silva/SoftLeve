@@ -3,6 +3,7 @@ package modelo.controle.servlet.usuario;
 import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,21 +15,31 @@ import javax.servlet.http.HttpSession;
 
 import modelo.dao.desenvolvedor.DesenvolvedorDAO;
 import modelo.dao.desenvolvedor.DesenvolvedorDAOImpl;
+import modelo.dao.tarefa.TarefaDAO;
+import modelo.dao.tarefa.TarefaDAOImpl;
+import modelo.dao.tipotarefa.TipoTarefaDAO;
+import modelo.dao.tipotarefa.TipoTarefaDAOImpl;
 import modelo.dao.usuario.UsuarioDAO;
 import modelo.dao.usuario.UsuarioDAOImpl;
 import modelo.entidade.desenvolvedor.Desenvolvedor;
+import modelo.entidade.tarefa.Tarefa;
+import modelo.entidade.tipotarefa.TipoTarefa;
 import modelo.entidade.usuario.Usuario;
 
-@WebServlet(urlPatterns = {"/logar-usuario", "/redefinir-senha", "/desbloquear-usuario"})
+@WebServlet(urlPatterns = {"/logar-usuario", "/redefinir-senha", "/desbloquear-usuario", "/deslogar-usuario"})
 public class UsuarioServlet extends HttpServlet implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private UsuarioDAO daoUsuario;
 	private DesenvolvedorDAO daoDesenvolvedor;
+	private TarefaDAO daoTarefa;
+	private TipoTarefaDAO daoTipoTarefa;
 
 	public void init() {
 		daoUsuario = new UsuarioDAOImpl();
 		daoDesenvolvedor = new DesenvolvedorDAOImpl();
+		daoTarefa = new TarefaDAOImpl();
+		daoTipoTarefa = new TipoTarefaDAOImpl();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,6 +68,10 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 				desbloquearUsuario(request, response);
 				break;
 				
+			case "/deslogar-usuario":
+				deslogarUsuario(request, response);
+				break;	
+				
 			default:
 				retornarMenu(request, response);
 				break;
@@ -84,6 +99,26 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 			throws SQLException, ServletException, IOException {
 
 		HttpSession session = request.getSession();
+		
+		Usuario usuarioSessao = (Usuario) session.getAttribute("usuario");
+		if(usuarioSessao != null) {
+			if (usuarioSessao.isAdministrador()) {
+				List<Tarefa> listaTarefa = daoTarefa.recuperarTarefas();
+				List<TipoTarefa> listaTipoTarefa = daoTipoTarefa.recuperarTipoTarefas();
+				
+				request.setAttribute("listaTarefa", listaTarefa);
+				request.setAttribute("listaTipoTarefa", listaTipoTarefa);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/administrador/home-adm.jsp");
+				dispatcher.forward(request, response);
+				return;
+			} else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/desenvolvedor/home-dev.jsp");
+				dispatcher.forward(request, response);
+				return;
+			}
+		}
+		
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
 		session.setAttribute("emailSessao", email);
@@ -106,6 +141,12 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 				session.setAttribute("desenvolvedor", desenvolvedor);
 				
 				if (usuarios.isAdministrador()) {
+					List<Tarefa> listaTarefa = daoTarefa.recuperarTarefas();
+					List<TipoTarefa> listaTipoTarefa = daoTipoTarefa.recuperarTipoTarefas();
+					
+					request.setAttribute("listaTarefa", listaTarefa);
+					request.setAttribute("listaTipoTarefa", listaTipoTarefa);
+					
 					RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/administrador/home-adm.jsp");
 					dispatcher.forward(request, response);
 					return;
@@ -168,5 +209,15 @@ public class UsuarioServlet extends HttpServlet implements Serializable {
 		
 		
 	}
+
+	private void deslogarUsuario(HttpServletRequest request, HttpServletResponse response)throws SQLException, ServletException, IOException {
+		HttpSession session = request.getSession();
+		session.setAttribute("usuario", null);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("logar-usuario");
+		dispatcher.forward(request, response);
+		
+	}
+	
 
 }

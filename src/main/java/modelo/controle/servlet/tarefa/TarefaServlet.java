@@ -152,14 +152,16 @@ public class TarefaServlet extends HttpServlet implements Serializable {
 	private void deletarTarefa(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 
-		Tarefa tarefa = daoTarefa.recuperarTarefaPorIdUsaurio(Long.parseLong(request.getParameter("idTarefa")));
-		TipoTarefa tipoTarefa = daoTipoTarefa
-				.recuperarTipoTarefaPorIdUsaurio(Long.parseLong(request.getParameter("idTipoTarefa")));
+		
+		TipoTarefa tipoTarefa = daoTipoTarefa.recuperarTipoTarefaPorIdUsaurio(Long.parseLong(request.getParameter("idTipoTarefa")));
+		
+		Tarefa tarefa = daoTarefa.recuperarTarefaPorIdUsaurio(tipoTarefa.getTarefa().getIdTarefa());
+		
 
 		daoTarefa.deletarTarefa(tarefa);
 		daoTipoTarefa.deletarTipoTarefa(tipoTarefa);
 
-		RequestDispatcher dispatcher = request.getRequestDispatcher("paginas/desenvolvedor/home-dev.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("logar-usuario");
 		dispatcher.forward(request, response);
 	}
 

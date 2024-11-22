@@ -65,3 +65,20 @@ function openEditarTarefa(idTipoTarefa) {
 			console.error("Erro:", error);
 		});
 }
+
+function openEditarUsuario(idUsuario) {
+	console.log("Abrindo modal para ID:", idUsuario); // Adicione isso para testar
+	const modal = document.getElementById("modal");
+	modal.style.display = "flex";
+
+	// Carrega conteúdo externo
+	fetch(`paginas/desenvolvedor/editarDesenvolvedor.jsp?idUsuario=${idUsuario}`) // Substitua por uma URL válida para teste
+		.then(response => response.text())
+		.then(data => {
+			document.getElementById("modal-body").innerHTML = data;
+		})
+		.catch(error => {
+			document.getElementById("modal-body").innerHTML = "Erro ao carregar conteúdo.";
+			console.error("Erro:", error);
+		});
+}

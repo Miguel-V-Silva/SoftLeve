@@ -79,6 +79,17 @@ nav{
     background-color: #1e40af;
 }
 
+#deslogar a{
+	color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+#deslogar a:hover{
+	color: #ffffff;
+}
+
 .container{
     max-width: 1200px;
     margin: auto;
@@ -468,6 +479,73 @@ footer .column > a:hover{
         transform: scale(1);
     }
 }
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #27272a;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    text-align: left;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table thead {
+    background-color: #1d4ed8;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+table th,
+table td {
+	color: white;
+    padding: 12px 15px;
+    border: 1px solid #323232;
+}
+
+table tr {
+    transition: background-color 0.3s ease;
+}
+
+table tr:nth-child(even) {
+    background-color: #323232;
+}
+
+table tr:hover {
+    background-color: #1e40af;
+}
+
+table a {
+    color: #1d4ed8;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+table a:hover {
+    color: #ffffff;
+}
+
+input[type="search"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #323232;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #18181b;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input[type="search"]:focus {
+    border-color: #1d4ed8;
+}
+
 
 @media (width < 600px){
     header .image::before{

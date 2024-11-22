@@ -33,7 +33,9 @@
 			<li id="link1" class="link"><a href="#">Tarefas</a></li>
 			<li id="link2" class="link"><a href="#">Perfil</a></li>
 		</ul>
-		<button class="btn">Hire Me</button>
+		<button class="btn">
+			<a id="deslogar" href="deslogar-usuario">Deslogar</a>
+		</button>
 	</nav>
 
 	<header class="container">
